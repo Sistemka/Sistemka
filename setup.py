@@ -18,7 +18,7 @@ def requirements():
 
 
 setup(
-    name='nlogic',
+    name='sistemka',
     version='0.1.1',
     description='Connectors for Sistemka micro-services',
     author='Sistemka',
