@@ -13,15 +13,13 @@ class SearchEngine(BaseService):
             **kwargs
         )
 
-    def predict(self,
-                image_path: str,
-                image_name: str,
-                mimetype: str = 'image/jpeg',
-                **kwargs: dict
-                ):
-        url = self.url + 'predict'
+    def search(self,
+               image_path: str,
+               **kwargs: dict
+               ):
+        url = self.url + 'search'
         image = open(image_path, 'rb')
-        files = {'image': (image_name, image, mimetype)}
+        files = {'image': image}
         r = self.make_request(
             request_type='POST',
             url=url,
@@ -30,3 +28,15 @@ class SearchEngine(BaseService):
         )
         image.close()
         return r.json().get('result')
+
+    def indexing(self,
+                 **kwargs: dict
+                 ):
+        url = self.url + 'indexing'
+
+        r = self.make_request(
+            request_type='GET',
+            url=url,
+            **kwargs
+        )
+        return r.json().get('message')
