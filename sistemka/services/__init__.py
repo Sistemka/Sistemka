@@ -1,7 +1,7 @@
-from .image2vector import Image2Vector
 from .SearchEngine import SearchEngine
+from .ImageManager import ImageManager
 
 __all__ = [
-    'Image2Vector',
-    'SearchEngine'
+    'SearchEngine',
+    'ImageManager'
 ]
