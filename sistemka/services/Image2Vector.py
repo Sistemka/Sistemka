@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List
 
 from .base import BaseService
 
@@ -16,24 +16,38 @@ class Image2Vector(BaseService):
             **kwargs
         )
 
-    def vectorize(
+    def vectorize_bulk(
             self,
-            image_paths: Union[str, List[str]],
+            images_paths: List[str],
             **kwargs: dict
     ):
-        url = self.url + '/image2vector'
-        images = {}
-        if isinstance(image_paths, str):
-            images['image'] = open(image_paths, 'rb')
-        else:
-            for image in image_paths:
-                images[image] = open(image, 'rb')
+        url = self.url + 'image2vector/bulk'
+        files = {}
+        for image in images_paths:
+            files[image] = open(image, 'rb')
         r = self.make_request(
             request_type='POST',
             url=url,
-            files=images,
+            files=files,
             **kwargs
         )
-        for image in images.values():
+        for image in files.values():
             image.close()
+        return r.json().get('result')
+
+    def vectorize(
+            self,
+            image_path: str,
+            **kwargs: dict
+    ):
+        url = self.url + 'image2vector'
+        image = open(image_path, 'rb')
+        files = {'image': image}
+        r = self.make_request(
+            request_type='POST',
+            url=url,
+            files=files,
+            **kwargs
+        )
+        image.close()
         return r.json().get('result')
