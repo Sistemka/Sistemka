@@ -35,6 +35,8 @@ class Segmentator(BaseService):
             **kwargs
         )
         image.close()
+        if r.status_code == 204:
+            return None
 
         Path(cropped_images_dir).mkdir(parents=True, exist_ok=True)
 
