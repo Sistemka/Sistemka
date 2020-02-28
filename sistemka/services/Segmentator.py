@@ -6,11 +6,12 @@ from .base import BaseService
 
 
 class Segmentator(BaseService):
-    def __init__(self,
-                 service_name: str = 'Segmentator',
-                 url: str = 'http://165.22.95.38:4993/',
-                 **kwargs: dict
-                 ):
+    def __init__(
+            self,
+            service_name: str = 'Segmentator',
+            url: str = 'http://165.22.95.38:4993/',
+            **kwargs: dict
+    ):
         super(Segmentator, self).__init__(
             service_name=service_name,
             url=url,
@@ -22,7 +23,7 @@ class Segmentator(BaseService):
             image_path: str,
             cropped_images_dir: str,
             **kwargs: dict
-            ):
+    ):
         url = self.url + 'segmentation'
         image = open(image_path, 'rb')
         files = {'image': image}
