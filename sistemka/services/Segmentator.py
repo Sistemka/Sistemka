@@ -48,7 +48,7 @@ class Segmentator(BaseService):
         os.remove(zip_file_path)
 
         cropped_images_paths = [
-            image for image in os.listdir(cropped_images_dir)
+            Path(cropped_images_dir, image).as_posix() for image in os.listdir(cropped_images_dir)
             if os.path.isfile(Path(cropped_images_dir, image))
         ]
 
