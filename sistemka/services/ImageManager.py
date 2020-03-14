@@ -35,7 +35,7 @@ class ImageManager(BaseService):
         return r.json().get('message')
 
     def upload_image_bytes(self,
-                       params):
+                           params):
         url = self.url + 'image/upload'
         files = {'image': params.pop('image')}
         r = self.make_request(
