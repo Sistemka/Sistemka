@@ -74,3 +74,14 @@ class ImageManager(BaseService):
             **kwargs
         )
         return r.json().get('result')
+
+    def get_image_info(self, image_path: str, **kwargs):
+        url = self.url + 'image/get-info'
+
+        r = self.make_request(
+            request_type='GET',
+            url=url,
+            params={'path': image_path},
+            **kwargs
+        )
+        return r.json().get('result')
