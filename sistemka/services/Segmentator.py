@@ -9,7 +9,7 @@ class Segmentator(BaseService):
     def __init__(
             self,
             service_name: str = 'Segmentator',
-            url: str = 'http://165.22.95.38:4993/',
+            url: str = 'http://95.216.215.173:4993/',
             **kwargs: dict
     ):
         super(Segmentator, self).__init__(
@@ -22,6 +22,7 @@ class Segmentator(BaseService):
             self,
             image_path: str,
             cropped_images_dir: str,
+            mode: str = 'box',
             **kwargs: dict
     ):
         url = self.url + 'segmentation'
@@ -31,7 +32,9 @@ class Segmentator(BaseService):
             request_type='POST',
             url=url,
             files=files,
-            params={'return_vector': False},
+            params={
+                'mode': mode
+            },
             **kwargs
         )
         image.close()
