@@ -1,5 +1,5 @@
 from pathlib import Path
-from  typing import ByteString
+from typing import ByteString
 
 from .base import BaseService
 
