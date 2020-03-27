@@ -48,7 +48,7 @@ class ImageManager(BaseService):
 
     def download_image(self,
                        url: str,
-                       path_to_download: str,
+                       path_to_download: [str, Path] = None,
                        **kwargs: dict
                        ):
         url = self.url + f"image/download/{url}"
@@ -57,11 +57,14 @@ class ImageManager(BaseService):
             url=url,
             **kwargs
         )
-        Path(Path(path_to_download).parent).mkdir(
-            parents=True, exist_ok=True
-        )
-        with open(Path(path_to_download), 'wb') as f:
-            f.write(r.content)
+        if path_to_download:
+            Path(Path(path_to_download).parent).mkdir(
+                parents=True, exist_ok=True
+            )
+            with open(Path(path_to_download), 'wb') as f:
+                f.write(r.content)
+        else:
+            return r.content
 
     def get_urls(self,
                  **kwargs: dict
